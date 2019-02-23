@@ -1,25 +1,24 @@
 import sys
-
-REQUIRED_PYTHON = "{{ cookiecutter.python_interpreter }}"
+import os
 
 
 def main():
-    system_major = sys.version_info.major
-    if REQUIRED_PYTHON == "python":
-        required_major = 2
-    elif REQUIRED_PYTHON == "python3":
-        required_major = 3
-    else:
-        raise ValueError("Unrecognized python interpreter: {}".format(
-            REQUIRED_PYTHON))
-
-    if system_major != required_major:
+    if not sys.version.startswith("{{ cookiecutter.python_version }}"):
         raise TypeError(
             "This project requires Python {}. Found: Python {}".format(
-                required_major, sys.version))
-    else:
-        print(">>> Development environment passes all tests!")
+                sys.version
+            )
+        )
+
+    if os.environ["CONDA_DEFAULT_ENV"] != "{{ cookiecutter.env_name }}":
+        raise TypeError(
+            "ERROR: The {{ cookiecutter.env_name }} environment is not activated.\n"
+            + "Activate with `conda activate {{ cookiecutter.env_name }}`.\n"
+            + "Create or update the environment with `make environment`."
+        )
+
+    print(">>> Development environment passes all tests!")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

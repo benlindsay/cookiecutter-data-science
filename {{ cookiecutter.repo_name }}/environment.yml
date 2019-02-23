@@ -1,0 +1,17 @@
+name: {{ cookiecutter.env_name }}
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python={{ cookiecutter.python_version }}
+  - awscli
+  - black
+  - click
+  - coverage
+  - flake8
+  - matplotlib
+  - nb_conda_kernels
+  - python-dotenv
+  - sphinx
+  - pip:
+    - -e .
