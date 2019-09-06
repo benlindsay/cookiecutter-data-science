@@ -9,8 +9,8 @@ dependencies:
   - click
   - coverage
   - flake8
-  - matplotlib
   - nb_conda_kernels
+  - pip
   - python-dotenv
   - sphinx
   - pip:
